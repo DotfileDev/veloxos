@@ -4,6 +4,8 @@ org     0x7C00
 %include "bootsector.asm"
 
 load_kernel:
+        call    enable_a20
+
         cli
         
         lgdt    [gdt32_descriptor]
@@ -34,6 +36,7 @@ KERNEL_ADDRESS                  equ     0x00100000
 
 TEMP_SUCCESS_MSG                db      "Success!", NULL
 
+%include "enable_a20.asm"
 %include "global_descriptor_table.asm"
 
 align   512,    db      0x00
