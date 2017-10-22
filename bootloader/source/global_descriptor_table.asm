@@ -25,3 +25,29 @@ gdt32_begin:
         ; Null segment.
         dq      0x0000000000000000
 gdt32_end:
+
+gdt64_descriptor:
+        dw      gdt64_end - gdt64_begin - 1
+        dd      gdt64_begin
+
+align   8
+gdt64_begin:
+        ; Null segment.
+        dq      0x0000000000000000
+        ; Code segment.
+        dw      0xFFFF
+        dw      0x0000
+        db      0x00
+        db      0b10011000
+        db      0b00100000
+        db      0x00
+        ; Data segment.
+        dw      0xFFFF
+        dw      0x0000
+        db      0x00
+        db      0b10010010
+        db      0b00100000
+        db      0x00
+        ; Null segment.
+        dq      0x0000000000000000
+gdt64_end:
